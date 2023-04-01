@@ -22,13 +22,6 @@ public class destructibleWall : MonoBehaviour
         if (other.gameObject.CompareTag("player"))
         {
             Instantiate(destroyedWall, transform.position, transform.rotation);
-            for (int x = 0; x < destroyedWall.transform.childCount; x++)
-            {
-                GameObject t = destroyedWall.transform.GetChild(x).gameObject;
-                float randomNumber = Random.Range(0, 2);
-                moveForce += transform.forward * -35 * randomNumber * Time.deltaTime;
-                t.transform.position -= moveForce;
-            }
             Destroy(gameObject);
         }
     }

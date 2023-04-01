@@ -32,9 +32,9 @@ public class CarController : MonoBehaviour
         }
         Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
         localVelocity.x = 0;
-        if (localVelocity.z >= 45)
+        if (localVelocity.z >= 40)
         {
-            localVelocity.z = 45;
+            localVelocity.z = 40;
         }
         rb.velocity = transform.TransformDirection(localVelocity);
         if (Input.GetKey(KeyCode.D))
