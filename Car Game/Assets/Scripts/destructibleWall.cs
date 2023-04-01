@@ -26,7 +26,7 @@ public class destructibleWall : MonoBehaviour
             {
                 GameObject t = destroyedWall.transform.GetChild(x).gameObject;
                 float randomNumber = Random.Range(0, 2);
-                moveForce += transform.right * 15 * randomNumber * Time.deltaTime * 0.00000000001f;
+                moveForce += transform.forward * -35 * randomNumber * Time.deltaTime;
                 t.transform.position -= moveForce;
             }
             Destroy(gameObject);

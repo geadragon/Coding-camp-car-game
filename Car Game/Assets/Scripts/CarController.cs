@@ -7,28 +7,44 @@ using TMPro;
 
 public class CarController : MonoBehaviour
 {
-    private Vector3 MoveForce;
-    public float forwardAcceleration = 4f;
-    public float reverseAcceleration = 4f;
-    public float turnAngle = 1f;
+    public float speed;
+    public float turnspeed;
+    private Rigidbody rb;
+    public float moveConstant;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        rb.maxAngularVelocity = 1f;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Calculating the forward/back Vector
-        MoveForce += transform.forward * forwardAcceleration * Input.GetAxis("Vertical") * Time.deltaTime;
-        // Apply calculation onto our player
-        transform.position += MoveForce * Time.deltaTime;
-
-        // Calculating positive/negative turn Vector
-        float turning = Input.GetAxis("Horizontal");
-        // Apply calcaulation onto our player
-        transform.Rotate(Vector3.up * turning * MoveForce.magnitude * turnAngle * Time.deltaTime);
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb.AddRelativeForce(Vector3.forward * speed * moveConstant);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            rb.AddRelativeForce(Vector3.back * speed * moveConstant);
+        }
+        Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
+        localVelocity.x = 0;
+        if (localVelocity.z >= 45)
+        {
+            localVelocity.z = 45;
+        }
+        rb.velocity = transform.TransformDirection(localVelocity);
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb.AddTorque(Vector3.up * turnspeed * moveConstant);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb.AddTorque(Vector3.down * turnspeed * moveConstant);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
