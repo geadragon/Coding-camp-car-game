@@ -33,9 +33,10 @@ public class CarController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //if the other is changelevel box loads level 2
+        Debug.Log("hi");
         if (other.gameObject.CompareTag("changeLevel"))
         {
-            SceneManager.LoadScene("Level 2");
+            SceneManager.LoadScene("SampleScene 1");
         }
     }
 }
