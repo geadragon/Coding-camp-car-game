@@ -24,11 +24,11 @@ public class CarController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rb.AddRelativeForce(Vector3.forward * speed * moveConstant);
+            rb.AddRelativeForce(Vector3.forward * speed * moveConstant * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            rb.AddRelativeForce(Vector3.back * speed * moveConstant);
+            rb.AddRelativeForce(Vector3.back * speed * moveConstant * Time.deltaTime);
         }
         Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
         localVelocity.x = 0;
@@ -39,11 +39,11 @@ public class CarController : MonoBehaviour
         rb.velocity = transform.TransformDirection(localVelocity);
         if (Input.GetKey(KeyCode.D))
         {
-            rb.AddTorque(Vector3.up * turnspeed * moveConstant);
+            rb.AddTorque(Vector3.up * turnspeed * moveConstant * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            rb.AddTorque(Vector3.down * turnspeed * moveConstant);
+            rb.AddTorque(Vector3.down * turnspeed * moveConstant * Time.deltaTime);
         }
     }
     private void OnTriggerEnter(Collider other)
